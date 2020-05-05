@@ -7,6 +7,8 @@
 #include "../inc/Complex.hh"
 #include "../inc/Vector.hh"
 
+#undef minor // jakis problem na ubuntu, ktorego nie ma na macu
+
 template <class T, size_t size>
 class Matrix {
 

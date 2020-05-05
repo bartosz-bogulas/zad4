@@ -1,4 +1,8 @@
+#include "../inc/Complex.hh"
 #include "../inc/LinearEquation.hh"
+
+using LinearEquation8d = LinearEquation<double, 8>;
+using LinearEquation8c = LinearEquation<Complex<double>, 8>;
 
 int main(int argc, char** argv) {
     char field;
@@ -6,7 +10,7 @@ int main(int argc, char** argv) {
 
     switch (field) {
         case 'r' : {
-            LinearEquation5d equation;
+            LinearEquation8d equation;
 
             std::cout << "Uklad rownan liniowych o wspolczynnikach rzeczywistych" << std::endl;
             std::cout << "Macierz A^T:" << std::endl;
@@ -27,7 +31,7 @@ int main(int argc, char** argv) {
         }
         break;
         case 'z' : {
-            LinearEquation5c equation;
+            LinearEquation8c equation;
 
             std::cout << "Uklad rownan liniowych o wspolczynnikach zespolonych" << std::endl;
             std::cout << "Macierz A^T:" << std::endl;
