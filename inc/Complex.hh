@@ -5,37 +5,113 @@
 #include <cmath>
 #include <sstream>
 
+/* mowiac liczba mam na mysli liczba zespolona */
+
+/**
+ * Klasa reprezentujaca liczbe zespolona nad cialem T
+ * @tparam T
+ */
 template <class T>
 class Complex {
 public:
     T real;
     T imaginary;
 
+    /**
+     * Tworzy liczbe z podanych wartosci
+     * @param real
+     * @param imaginary
+     */
     Complex(T real, T imaginary = 0);
+
+    /**
+     * Tworzy liczbe (0, 0)
+     */
     Complex() = default;
 
+    /**
+     * Wylicza wartosc bezwzgledna
+     * @return wartosc
+     */
     double abs() const;
+
+    /**
+     * Sprzezenie liczby
+     * @return sprzezona liczbe
+     */
     Complex<T> conjugate() const;
 
+    /**
+     * Operator dodawania liczb
+     * @param complex
+     * @return liczba
+     */
     Complex<T> operator+(const Complex<T>& complex) const;
+
+    /**
+     * Operator odejmowania liczb
+     * @param complex
+     * @return liczba
+     */
     Complex<T> operator-(const Complex<T>& complex) const;
+
+    /**
+     * Operator mnozenia liczb
+     * @param complex
+     * @return liczba
+     */
     Complex<T> operator*(const Complex<T>& complex) const;
+
+    /**
+     * Operator dzielenia liczb
+     * @param complex
+     * @return liczba
+     */
     Complex<T> operator/(const Complex<T>& complex) const;
 
+    /**
+     * Operator dodawania z przypisaniem liczb
+     * @param complex
+     * @return referencje na liczbe
+     */
     Complex<T>& operator+=(const Complex<T>& complex);
 
+    /**
+     * Operator mnozenia liczby przez skalar
+     * @param complex
+     * @return liczba
+     */
     Complex<T> operator*(T value) const;
+
+    /**
+     * Operator dzielenia liczby przez skalar
+     * @param complex
+     * @return liczba
+     */
     Complex<T> operator/(T value) const;
 
+    /* niezalezna templatka, zeby uniknac problemow kompilacji */
+
+    /**
+     * Przeladowany operator wejscia
+     * @param in
+     * @param complex
+     */
     template <class _T>
     friend std::istream& operator>>(std::istream& in, Complex<_T>& complex);
+
+    /**
+     * Przeladowany operator wyjscia
+     * @param out
+     * @param complex
+     */
     template <class _T>
     friend std::ostream& operator<<(std::ostream& out, const Complex<_T>& complex);
 
 private:
-    static const char opening_parenthesis = '(';
-    static const char closing_parenthesis = ')';
-    static const char i = 'i';
+    static const char opening_parenthesis = '('; /** Znak nawiasu otwierajacego */
+    static const char closing_parenthesis = ')'; /** Znak nawiasu zamykajacego */
+    static const char i = 'i'; /** Znak reprezentujacy komponent urojony */
 };
 
 template <class T>
@@ -110,7 +186,7 @@ std::istream& operator>>(std::istream& in, Complex<T>& complex) {
     if (!(in >> complex.real))
         return in;
 
-    // according to stackoverflow cin does not always read double followed by a char properly
+    /* zgodnie ze stackoverflow cin czasem zle czyta double jesli po nim jest char (niebialy znak) */
 
     std::stringstream ss;
 

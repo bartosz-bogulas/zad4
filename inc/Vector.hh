@@ -6,29 +6,104 @@
 
 #include "../inc/Complex.hh"
 
+/**
+ * Klasa reprezentujaca wektor o skalarach T i rozmiarze size
+ * @tparam T
+ * @tparam size
+ */
 template <class T, size_t size>
 class Vector {
 
 public:
+    /**
+     * Tworzy wektor o wszystkich skalarach rownych podanemu
+     * @param scalar
+     */
     explicit Vector(T scalar);
+
+    /**
+     * Tworzy wektor zerowy
+     */
     Vector() = default;
 
+    /**
+     * Wylicza iloczyn skalarny
+     * @param vector
+     * @return wartosc
+     */
     T dot(const Vector<T, size>& vector) const;
 
+    /**
+     * Operator dodawania wektorow
+     * @param vector
+     * @return wektor
+     */
     Vector<T, size> operator+(const Vector<T, size>& vector) const;
+
+    /**
+     * Operator odejmowania wektorow
+     * @param vector
+     * @return wektor
+     */
     Vector<T, size> operator-(const Vector<T, size>& vector) const;
 
+    /**
+     * Operator mnozenia wektora przez skalar
+     * @param scalar
+     * @return wektor
+     */
     Vector<T, size> operator*(T scalar) const;
+
+    /**
+     * Operator dzielenia wektora przez skalar
+     * @param scalar
+     * @return wektor
+     */
     Vector<T, size> operator/(T scalar) const;
 
+    /**
+     * Operator indeksowania wektora
+     * @param i
+     * @return skalar na i-tej pozycji w wektorze
+     */
     T operator[](size_t i) const;
+
+    /**
+     * Operator indeksowania wektora
+     * @param i
+     * @return referencje na skalar na i-tej pozycji w wektorze
+     */
     T& operator[](size_t i);
 
+    /**
+     * Operator indeksowania wektora ze sprawdzaniem granic
+     * @param i
+     * @return skalar na i-tej pozycji w wektorze
+     */
     T operator()(size_t i) const;
+
+    /**
+     * Operator indeksowania wektora ze sprawdzaniem granic
+     * @param i
+     * @return referencje na skalar na i-tej pozycji w wektorze
+     */
     T& operator()(size_t i);
 
+    /* niezalezna templatka, zeby uniknac problemow kompilacji */
+
+    /**
+     * Przeladowany operator wejscia
+     * @param in
+     * @param vector
+     */
     template <typename _T, size_t _size>
     friend std::istream& operator>>(std::istream& in, Vector<_T, _size>& vector);
+
+    /**
+     * Przeladowany operator wyjscia
+     * @param in
+     * @param vector
+     */
     template <typename _T, size_t _size>
     friend std::ostream& operator<<(std::ostream& out, const Vector<_T, _size>& vector);
 
@@ -123,7 +198,7 @@ std::ostream& operator<<(std::ostream& out, const Vector<T, size>& vector) {
     return out;
 }
 
-using Vector5d = Vector<double, 5>;
-using Vector5c = Vector<Complex<double>, 5>;
+using Vector5d = Vector<double, 5>; /** Alias dla wektora 5 liczb rzeczywistych */
+using Vector5c = Vector<Complex<double>, 5>; /** Alias dla wektora 5 liczb zespolonych */
 
 #endif //ZAD3_VECTOR_HH
